@@ -4,28 +4,29 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    cx0, cy0 = pose_to_cv(0, 0, 0, +5.0)
-    cx1, cy1 = pose_to_cv(2, 2, 0, -5.0)
+    cx0, cy0 = pose_to_cv(0, 0, 0)
+    cx1, cy1 = pose_to_cv(2, 2, 0)
 
-    spline = Spline(cx0, cx1, cy0, cy1)
+    spline1 = Spline(cx0, cx1, cy0, cy1)
 
-    ts = []
-    xs = []
-    ys = []
-    curvatures = []
+    ts1 = []
+    xs1 = []
+    ys1 = []
+    ks1 = []
 
     for t in np.linspace(0, 1, 50):
-        x, y, _, curvature = spline.at(t)
-        ts.append(t)
-        xs.append(x)
-        ys.append(y)
-        curvatures.append(curvature)
+        x1, y1, _, k1, _ = spline1.at(t)
 
-    path = plt.figure(1)
-    plt.plot(xs, ys)
+        ts1.append(t)
+        xs1.append(x1)
+        ys1.append(y1)
+        ks1.append(k1)
 
-    curv = plt.figure(2)
-    plt.plot(ts, curvatures)
+    plt.figure(1)
+    plt.plot(xs1, ys1)
+
+    plt.figure(2)
+    plt.plot(ts1, ks1)
 
     plt.show()
 
